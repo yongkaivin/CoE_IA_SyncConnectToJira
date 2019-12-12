@@ -1,0 +1,650 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GetAutomationInfo" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_strUrl" Type="InArgument(x:String)" />
+    <x:Property Name="out_strAutomationName" Type="OutArgument(x:String)" />
+    <x:Property Name="out_strAutomationDesc" Type="OutArgument(x:String)" />
+    <x:Property Name="out_strLevel1" Type="OutArgument(x:String)" />
+    <x:Property Name="out_strLevel2" Type="OutArgument(x:String)" />
+    <x:Property Name="out_strLevel3" Type="OutArgument(x:String)" />
+    <x:Property Name="out_strAutomationBenefits" Type="OutArgument(x:String)" />
+    <x:Property Name="out_dtCollaborators" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_strStatus" Type="OutArgument(x:String)" />
+    <x:Property Name="in_strConnectHomepage" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1082.66666666667,5418.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GetAutomationInfo_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="23">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="1. Navigate to the Automation Project Page&#xA;2. Extract info needed for Jira" DisplayName="GetAutomation" sap:VirtualizedContainerService.HintSize="1062.66666666667,5358.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser - Automation Page" sap:VirtualizedContainerService.HintSize="1020.66666666667,5221.33333333333" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="e5827c27aeb9c1db3b8924407109b804" Selector="&lt;html app='chrome.exe' title='UiPath Connect Enterprise' /&gt;">
+      <ui:BrowserScope.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="986.666666666667,5075.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="strAutomationName" />
+              <Variable x:TypeArguments="x:String" Name="strAutomationDesc" />
+              <Variable x:TypeArguments="x:String" Name="strLevel1" />
+              <Variable x:TypeArguments="x:String" Name="strLevel2" />
+              <Variable x:TypeArguments="x:String" Name="strLevel3" />
+              <Variable x:TypeArguments="x:String" Name="strBenefitHours" />
+              <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="dtCollaborators" />
+              <Variable x:TypeArguments="ui:GenericValue" Name="strStatus" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To" sap:VirtualizedContainerService.HintSize="944.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="NavigateTo_2" Url="[in_strUrl]" />
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Automation Name" sap:VirtualizedContainerService.HintSize="902.666666666667,106" sap2010:WorkflowViewState.IdRef="GetValue_1">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3f82b691861d031eea8a02329d3f3305" Selector="&lt;webctrl tag='H1' class='BannerAutomationProfile__header' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="x:String">[strAutomationName]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Description" sap:VirtualizedContainerService.HintSize="902.666666666667,106" sap2010:WorkflowViewState.IdRef="GetValue_2">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="ffdbd4718218dc02e70218f10b3641dc" Selector="&lt;webctrl tag='H3' innertext='Description' /&gt;&lt;nav up='2' /&gt;&lt;webctrl parentid='root' tag='DIV' class='public-DraftEditor-content' parentclass='DraftEditor-editorContainer' idx='1' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="x:String">[strAutomationDesc]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Level 1" sap:VirtualizedContainerService.HintSize="902.666666666667,106" sap2010:WorkflowViewState.IdRef="GetValue_3">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="6a297acb16e7549919fb3899d301f72a" Selector="&lt;webctrl tag='SPAN' parentclass='ProcessBreadCrumbs__bread-crumb' idx='1' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="x:String">[strLevel1]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Level 2" sap:VirtualizedContainerService.HintSize="902.666666666667,106" sap2010:WorkflowViewState.IdRef="GetValue_4">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="9e02418bbac09aba74c2d8a2eb402148" Selector="&lt;webctrl tag='SPAN' parentclass='ProcessBreadCrumbs__bread-crumb' idx='2' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="x:String">[strLevel2]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Level 3" sap:VirtualizedContainerService.HintSize="902.666666666667,106" sap2010:WorkflowViewState.IdRef="GetValue_5">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="361f9d2aec0617d70b5026f91f796db7" Selector="&lt;webctrl tag='SPAN' parentclass='ProcessBreadCrumbs__bread-crumb' idx='3' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="x:String">[strLevel3]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Benefits (Hours)" sap:VirtualizedContainerService.HintSize="902.666666666667,106" sap2010:WorkflowViewState.IdRef="GetValue_6">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="40c5f7dd8b57e006bd022f26e46bab11" Selector="&lt;webctrl aaname='Benefit ' parentid='root' tag='DIV' innertext='Benefit (hours saved/year)' /&gt;&lt;nav up='1' /&gt;&lt;webctrl parentid='root' tag='DIV' parentclass='ChartPPPAssessmentScore_Info_Item' idx='2' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="x:String">[strBenefitHours]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Status" sap:VirtualizedContainerService.HintSize="902.666666666667,106" sap2010:WorkflowViewState.IdRef="GetValue_7">
+              <ui:GetValue.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b689b2fdfb82af3c2979c1ae0dc0cc63" Selector="&lt;webctrl tag='P' class='ProcessPhase__phase-name' parentclass='ProcessPhase__phase-item' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:GetValue.Target>
+              <ui:GetValue.Value>
+                <OutArgument x:TypeArguments="ui:GenericValue">[strStatus]</OutArgument>
+              </ui:GetValue.Value>
+            </ui:GetValue>
+            <Assign sap:VirtualizedContainerService.HintSize="902.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[strBenefitHours]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Replace(strBenefitHours,"[^0-9]","")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click on Collaborators" sap:VirtualizedContainerService.HintSize="902.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="526ddff61d975e87edc7ab42618ee65d" Selector="&lt;webctrl aaname='Collaborators' tag='A' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" sap2010:Annotation.AnnotationText="Check and see if first element is loaded" DisplayName="On Element Appear - Wait for Collaborators loaded" sap:VirtualizedContainerService.HintSize="902.666666666667,825.333333333333" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_1" RepeatForever="False">
+              <ui:OnUiElementAppear.Body>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="518,620.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="476,52.6666666666667" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,380" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Sequence DisplayName="Data Scraping" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'UiPathCon Page'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="dcaed7c3bf5bc2ad1098dc8f23e33822" Selector="&lt;html app='chrome.exe' title='UiPath Connect Enterprise' /&gt;">
+                            <ui:BrowserScope.Body>
+                              <ActivityAction x:TypeArguments="x:Object">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[dtCollaborators]" DisplayName="Extract Structured Data 'DIV'" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;/row&gt;&lt;column exact='1' name='Name' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserName' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Role' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser__top' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser__role' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='BusinessUnit' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='1'/&gt;&lt;webctrl tag='div' idx='2'/&gt;&lt;webctrl tag='span' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Department' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='2'/&gt;&lt;webctrl tag='div' idx='2'/&gt;&lt;webctrl tag='span' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_1" MaxNumberOfResults="0" SimulateClick="True">
+                                    <ui:ExtractData.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="7e3b400753eee89de6132bd385db0d66" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' parentid='root' tag='DIV' /&gt;" WaitForReady="COMPLETE">
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                      </ui:Target>
+                                    </ui:ExtractData.Target>
+                                  </ui:ExtractData>
+                                </Sequence>
+                              </ActivityAction>
+                            </ui:BrowserScope.Body>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:BrowserScope>
+                        </Sequence>
+                        <Sequence DisplayName="Data Scraping V2" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'UiPathCon Page'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="BrowserScope_4" InformativeScreenshot="f0c8bf0bc0a3d94ab794504aec133988" Selector="&lt;html app='chrome.exe' title='UiPath Connect Enterprise' /&gt;">
+                            <ui:BrowserScope.Body>
+                              <ActivityAction x:TypeArguments="x:Object">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[dtCollaborators]" DisplayName="Extract Structured Data 'DIV'" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;/row&gt;&lt;column exact='1' name='Name' attr='text' name2='Url' attr2='href'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserName' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Role' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser__top' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser__role' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='BusinessUnit' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='1'/&gt;&lt;webctrl tag='div' idx='2'/&gt;&lt;webctrl tag='span' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Department' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='2'/&gt;&lt;webctrl tag='div' idx='2'/&gt;&lt;webctrl tag='span' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='BusinessUnitFull' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='DepartmentFull' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='2'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_3" MaxNumberOfResults="0" SimulateClick="True">
+                                    <ui:ExtractData.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="1aa53cfa929fc2325961ab538f419dee" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' parentid='root' tag='DIV' /&gt;" WaitForReady="COMPLETE">
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                      </ui:Target>
+                                    </ui:ExtractData.Target>
+                                  </ui:ExtractData>
+                                </Sequence>
+                              </ActivityAction>
+                            </ui:BrowserScope.Body>
+                          </ui:BrowserScope>
+                        </Sequence>
+                        <Sequence DisplayName="Data Scraping V3" sap:VirtualizedContainerService.HintSize="200,69.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'UiPathCon Page'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="BrowserScope_6" InformativeScreenshot="2f5f1759bac11430f7874bf7d1c9e778" Selector="&lt;html app='chrome.exe' title='UiPath Connect Enterprise' /&gt;">
+                            <ui:BrowserScope.Body>
+                              <ActivityAction x:TypeArguments="x:Object">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[dtCollaborators]" DisplayName="Extract Structured Data 'DIV'" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;/row&gt;&lt;column exact='1' name='Name' attr='text' name2='Url' attr2='href'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserName' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Role' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser__top' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser__role' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='BusinessUnit' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='1'/&gt;&lt;webctrl tag='div' idx='2'/&gt;&lt;webctrl tag='span' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Department' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='2'/&gt;&lt;webctrl tag='div' idx='2'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;webctrl tag='span' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='BusinessUnitFull' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='DepartmentFull' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='2'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_4" MaxNumberOfResults="0" SimulateClick="True">
+                                    <ui:ExtractData.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="08ceb5759aaaebc1136995e8b75c3437" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' parentid='root' tag='DIV' /&gt;" WaitForReady="COMPLETE">
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                      </ui:Target>
+                                    </ui:ExtractData.Target>
+                                  </ui:ExtractData>
+                                </Sequence>
+                              </ActivityAction>
+                            </ui:BrowserScope.Body>
+                          </ui:BrowserScope>
+                        </Sequence>
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CommentOut>
+                  <Sequence DisplayName="Data Scraping V4" sap:VirtualizedContainerService.HintSize="476,436" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'UiPathCon Page'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="BrowserScope_7" InformativeScreenshot="9cf52ce5bbc3d89bd8b1a0606a2439ce" Selector="&lt;html app='chrome.exe' title='UiPath Connect Enterprise' /&gt;">
+                      <ui:BrowserScope.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[dtCollaborators]" DisplayName="Extract Structured Data - Collaborators" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;/row&gt;&lt;column exact='1' name='Name' attr='text' name2='Url' attr2='href'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserName' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Role' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser__top' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser__role' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='BusinessUnit' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='1'/&gt;&lt;webctrl tag='div' idx='2'/&gt;&lt;webctrl tag='span' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Department' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='2'/&gt;&lt;webctrl tag='div' idx='2'/&gt;&lt;webctrl tag='span' class='CellPPPCollaboratorUserSubtextRight' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='BusinessUnitFull' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='DepartmentFull' attr='text'&gt;&lt;webctrl tag='div' class='AutomationProfilePage__inner-container' idx='1'/&gt;&lt;webctrl tag='div' idx='1'/&gt;&lt;webctrl tag='div' class='jss105' idx='1'/&gt;&lt;webctrl tag='div' class='jss106 jss145 jss153 jss164'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUser' idx='1'/&gt;&lt;webctrl tag='a' class='CellPPPCollaboratorUserContainer' idx='1'/&gt;&lt;webctrl tag='div' class='CellPPPCollaboratorUserSubtextContainer' idx='2'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_5" MaxNumberOfResults="0" SimulateClick="True">
+                              <ui:ExtractData.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="92f613726d49fe12cf47b89f85357a0e" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' parentid='root' tag='DIV' /&gt;" WaitForReady="COMPLETE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:ExtractData.Target>
+                            </ui:ExtractData>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:BrowserScope.Body>
+                    </ui:BrowserScope>
+                  </Sequence>
+                </Sequence>
+              </ui:OnUiElementAppear.Body>
+              <ui:OnUiElementAppear.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="1858ab61282dbac9223900925dbb5248" Selector="&lt;webctrl parentid='root' tag='DIV' class='CellPPPCollaboratorUser*' idx='1' /&gt;" WaitForReady="COMPLETE">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                </ui:Target>
+              </ui:OnUiElementAppear.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:OnUiElementAppear>
+            <Assign sap:VirtualizedContainerService.HintSize="902.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_strAutomationName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[strAutomationName]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="902.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_strAutomationDesc]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[strAutomationDesc]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="902.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_strLevel1]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[strLevel1]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="902.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_strLevel2]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[strLevel2]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="902.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_strLevel3]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[strLevel3]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="944.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_strAutomationBenefits]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[strBenefitHours]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="944.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_strStatus]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[strStatus]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Sequence DisplayName="Cleanup Collaborator Data" sap:VirtualizedContainerService.HintSize="944.666666666667,1933.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="sd:DataTable" Name="dtFilterCollaborators" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If sap2010:Annotation.AnnotationText="if Department info is not available, then need to perform cleanup for all collaborators" Condition="[dtCollaborators.Columns.Contains(&quot;Department&quot;)]" DisplayName="Check if Data Scraping results contains Department info" sap:VirtualizedContainerService.HintSize="902.666666666667,395.333333333333" sap2010:WorkflowViewState.IdRef="If_3">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <ui:FilterDataTable DataTable="[dtCollaborators]" DisplayName="Filter Data Table" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtFilterCollaborators]" SelectColumnsMode="Keep">
+                    <ui:FilterDataTable.Filters>
+                      <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                        <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EMPTY">
+                          <ui:FilterOperationArgument.Column>
+                            <InArgument x:TypeArguments="x:String">["Department"]</InArgument>
+                          </ui:FilterOperationArgument.Column>
+                        </ui:FilterOperationArgument>
+                      </scg:List>
+                    </ui:FilterDataTable.Filters>
+                    <ui:FilterDataTable.SelectColumns>
+                      <scg:List x:TypeArguments="InArgument" Capacity="4">
+                        <x:Null />
+                      </scg:List>
+                    </ui:FilterDataTable.SelectColumns>
+                  </ui:FilterDataTable>
+                </If.Then>
+                <If.Else>
+                  <Sequence sap:VirtualizedContainerService.HintSize="304,216" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_11">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="sd:DataTable">[dtFilterCollaborators]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="sd:DataTable">[dtCollaborators]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:AddDataColumn x:TypeArguments="x:String" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" Unique="{x:Null}" ColumnName="Department" DataTable="[dtFilterCollaborators]" DisplayName="Add Data Column - Department" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" MaxLength="-1" />
+                  </Sequence>
+                </If.Else>
+              </If>
+              <If Condition="[dtFilterCollaborators IsNot Nothing And dtFilterCollaborators.Rows.Count &gt; 0]" DisplayName="Check records with empty Department" sap:VirtualizedContainerService.HintSize="902.666666666667,1406" sap2010:WorkflowViewState.IdRef="If_2">
+                <If.Then>
+                  <Sequence sap:VirtualizedContainerService.HintSize="756.666666666667,1255.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="714.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Clean up Collaborator Data : Empty Department found&quot;]" />
+                    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtCollaborators]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="714.666666666667,1028.66666666667" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                      <ui:ForEachRow.Body>
+                        <ActivityAction x:TypeArguments="sd:DataRow">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="664,879.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If Condition="[row(&quot;Department&quot;).ToString.Length = 0]" DisplayName="Check if Department is empty" sap:VirtualizedContainerService.HintSize="622,787.333333333333" sap2010:WorkflowViewState.IdRef="If_1">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <Sequence sap:VirtualizedContainerService.HintSize="476,636.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser - Connect" sap:VirtualizedContainerService.HintSize="434,544.666666666667" sap2010:WorkflowViewState.IdRef="BrowserScope_5" InformativeScreenshot="0759f2a3ecace19a460266ca6575443f" Selector="&lt;html app='chrome.exe' title='UiPath Connect Enterprise' /&gt;">
+                                    <ui:BrowserScope.Body>
+                                      <ActivityAction x:TypeArguments="x:Object">
+                                        <ActivityAction.Argument>
+                                          <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                        </ActivityAction.Argument>
+                                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,398.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                          <Sequence.Variables>
+                                            <Variable x:TypeArguments="x:String" Name="strDepartment" />
+                                          </Sequence.Variables>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="NavigateTo_3" Url="[in_strConnectHomepage + row(&quot;Url&quot;).ToString]" />
+                                          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text - Department" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetValue_8">
+                                            <ui:GetValue.Target>
+                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="40c75ab2163b23894caf977052c7a9f7" Selector="&lt;webctrl tag='LI' innertext='Department:*' /&gt;">
+                                                <ui:Target.TimeoutMS>
+                                                  <InArgument x:TypeArguments="x:Int32" />
+                                                </ui:Target.TimeoutMS>
+                                                <ui:Target.WaitForReady>
+                                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                </ui:Target.WaitForReady>
+                                              </ui:Target>
+                                            </ui:GetValue.Target>
+                                            <ui:GetValue.Value>
+                                              <OutArgument x:TypeArguments="x:String">[strDepartment]</OutArgument>
+                                            </ui:GetValue.Value>
+                                          </ui:GetValue>
+                                          <Assign DisplayName="Remove header from Department text" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_10">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Object">[row("Department")]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Object">[strDepartment.Replace("Department:", "").Trim]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </ActivityAction>
+                                    </ui:BrowserScope.Body>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:BrowserScope>
+                                </Sequence>
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEachRow.Body>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:ForEachRow>
+                  </Sequence>
+                </If.Then>
+              </If>
+            </Sequence>
+            <Assign sap:VirtualizedContainerService.HintSize="944.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[out_dtCollaborators]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[dtCollaborators]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:BrowserScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:BrowserScope>
+  </Sequence>
+</Activity>
