@@ -13,7 +13,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>792,1374.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>792,1408</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>IsNewJiraIssue_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="42">
@@ -66,7 +66,7 @@
       <AssemblyReference>UiPath.JiraSoftware</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="return TRUE if Jira Story exists&#xA;return FALSE if Jira Story doesn't exists" DisplayName="IsJiraIssueExist" sap:VirtualizedContainerService.HintSize="772,1274.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="return TRUE if Jira Story exists&#xA;return FALSE if Jira Story doesn't exists&#xD;&#xA;&#xD;&#xA;use Jira Connector to get the infomation" DisplayName="IsJiraIssueExist" sap:VirtualizedContainerService.HintSize="772,1308" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strAdvancedFilter" />
     </Sequence.Variables>
