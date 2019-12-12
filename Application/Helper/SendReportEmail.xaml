@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>632,629.333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>632,646</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SendReportEmail_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -60,7 +60,7 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SendReportEmail" sap:VirtualizedContainerService.HintSize="612,529.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SendReportEmail" sap:VirtualizedContainerService.HintSize="612,546" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strBody" />
     </Sequence.Variables>
@@ -69,7 +69,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If sap2010:Annotation.AnnotationText="if there are no records on the Pipeline, update the email body" Condition="[in_dtPipeline IsNot Nothing And in_dtPipeline.Rows.Count &gt; 0]" sap:VirtualizedContainerService.HintSize="570,248" sap2010:WorkflowViewState.IdRef="If_1">
+    <If sap2010:Annotation.AnnotationText="if there are no records on the Pipeline, update the email body&#xD;&#xA;" Condition="[in_dtPipeline IsNot Nothing And in_dtPipeline.Rows.Count &gt; 0]" sap:VirtualizedContainerService.HintSize="570,264.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
